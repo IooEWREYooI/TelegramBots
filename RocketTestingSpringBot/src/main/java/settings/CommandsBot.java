@@ -17,11 +17,11 @@ public class CommandsBot extends TelegramLongPollingBot {
 	
 	@Override
 	public String getBotUsername() {
-		return "RocketTestingSpringBot";
+		return "YOUR_BOT_NAME";
 	}
 	@Override
 	public String getBotToken() {
-		return "5560495332:AAEVPKg2gs3b8xunjiRWs-7_aZE8giCezRs";
+		return "YOUR_TOKEN";
 	}
 	
 	private void sendWithOutURL(Message message) {
