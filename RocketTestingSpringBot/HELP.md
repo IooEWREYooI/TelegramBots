@@ -1,9 +1,12 @@
-# Getting Started
+# Тестовый бот для видео 
 
-### Reference Documentation
-For further reference, please consider the following sections:
+### Здесь я нашел решения для:
+- Построение бота через SendMessage.builder()
+- Работы с parseMode() в SendMessage.builder()
+- Деплоя бота на VDS хостинг [YouTube](https://youtu.be/UC0VzH1ICEA)
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.7.2/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.7.2/maven-plugin/reference/html/#build-image)
+
+* [Официальная Apache Maven документация](https://maven.apache.org/guides/index.html)
+* [Spring Boot Maven Plugin Гайд](https://docs.spring.io/spring-boot/docs/2.7.2/maven-plugin/reference/html/)
+* [Создание OCI изображения](https://docs.spring.io/spring-boot/docs/2.7.2/maven-plugin/reference/html/#build-image)
 
