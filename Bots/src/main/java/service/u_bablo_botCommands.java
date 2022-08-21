@@ -26,16 +26,12 @@ public class u_bablo_botCommands extends TelegramLongPollingBot {
 	@Override
 	public String getBotUsername() // <- username бота без @ 
 	{
-		return "u_bablo_bot"; 
-		// Тестовый Crypto_Founds_Tier_bot
-		// Основной бот u_bablo_bot
+		return "YOUR_BOT_USERNAME";
 	}
 	@Override
 	public String getBotToken() // <- Токен бота 
 	{
-		return "5795389130:AAGdGalblVWm9MwTLPTEhlIKHlXy49CRSTo";
-		// Тестовый 5555839667:AAFmC5KIjwOECipbHAViD3W0Fv72B1eC9a4
-		// Основной бот 5795389130:AAGdGalblVWm9MwTLPTEhlIKHlXy49CRSTo
+		return "YOUR_BOT_TOKEN";
 	}
 	
 	// Методы отправки сообщений //
