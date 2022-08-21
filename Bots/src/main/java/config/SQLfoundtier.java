@@ -11,7 +11,7 @@ public class SQLfoundtier {
     /////// JDBC URL, username и пароль от MySQL ///////
     private static final String url = "jdbc:mysql://localhost:3306/foundtier"; // <- Имя БД
     private static final String user = "root";
-    private static final String password = "YashaRocketman2005@";
+    private static final String password = "YOUR_PASSWORD";
     public static ArrayList<String> table = new ArrayList<>();
     
     /////// JDBC варианты для открытия и изменения подключения ///////
