@@ -1,0 +1,4 @@
+service\BotCommands.class
+TelegramBot\RepeaterBot\Cust.class
+service\BotCommands$1.class
+TelegramBot\RepeaterBot\RepeaterBotApplication.class
