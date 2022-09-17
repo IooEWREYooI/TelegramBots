@@ -297,7 +297,11 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 			}
 			// Получение сообщения и преобразование в String (скан ответа, для подписанных) //
 			else if (tierScan == true && memberTrue || adminTrue || creatorTrue) {
-				try { tierScaner(update); } catch (SQLException e) { e.printStackTrace(); }
+				try {
+					tierScaner(update);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			// Если не подписан на канал //
@@ -307,7 +311,9 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 		
 		// Если сообщение содержит CallbackQuery (нажатие на кнопку)
 		else if (update.hasCallbackQuery()) {
-			try { answerToListIds(update, update.getCallbackQuery().getData()); } catch (IOException e) { e.printStackTrace(); }
+			try { answerToListIds(update, update.getCallbackQuery().getData()); } catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
