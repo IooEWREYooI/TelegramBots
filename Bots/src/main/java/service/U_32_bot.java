@@ -1,13 +1,12 @@
 package service;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-
+import static config.BotsConfig.U_32_bot_NAME;
+import static config.BotsConfig.U_32_bot_TOKEN;
 
 
 public class U_32_bot extends TelegramLongPollingBot {
@@ -98,11 +97,11 @@ public class U_32_bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "U32_bot";
+        return U_32_bot_NAME;
     }
     @Override
     public String getBotToken() {
-        return "5682178242:AAG-HG1o8AmDIPUMn1B1eKrapmWeoqXj7ik";
+        return U_32_bot_TOKEN;
     }
     public void sendMessage(Update update, String text) {
         try {

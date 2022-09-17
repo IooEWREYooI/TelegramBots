@@ -18,6 +18,9 @@ import org.telegram.telegrambots.meta.api.objects.chatmember.ChatMember;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import static config.BotsConfig.u_bablo_bot_NAME;
+import static config.BotsConfig.u_bablo_bot_TOKEN;
+
 public class u_bablo_bot extends TelegramLongPollingBot {
 	public boolean tierScan = false; // <- Скан для /tier отключен
 	public boolean tierTurn = false; // <- Сканирование запущено, когда оно запущено, сообщение о том что человек - не подписчик, не отправляется
@@ -26,12 +29,12 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 	@Override
 	public String getBotUsername() // <- username бота без @ 
 	{
-		return "YOUR_BOT_USERNAME";
+		return u_bablo_bot_NAME;
 	}
 	@Override
 	public String getBotToken() // <- Токен бота 
 	{
-		return "YOUR_BOT_TOKEN";
+		return u_bablo_bot_TOKEN;
 	}
 	
 	// Методы отправки сообщений //
