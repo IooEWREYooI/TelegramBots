@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import service.u_bablo_botCommands;
+import service.u_bablo_bot;
 
 @SpringBootApplication
 public class BotsApplication {
@@ -19,7 +19,7 @@ public class BotsApplication {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		////// Запуск бота u_bablo_bot //////
-		u_bablo_botCommands bot1 = new u_bablo_botCommands();
+		u_bablo_bot bot1 = new u_bablo_bot();
 		try {
 			TelegramBotsApi u_bablo_bot = new TelegramBotsApi(DefaultBotSession.class);
 			u_bablo_bot.registerBot(bot1);
