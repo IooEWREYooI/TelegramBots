@@ -9,9 +9,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import config.API_CoinGeko;
-import config.SQLcoingekoapitable;
-import config.SQLfoundtier;
+import config.API.API_CoinGeko;
+import config.SQL.SQLcoingekoapitable;
+import config.SQL.SQLfoundtier;
 
 import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChatMember;
 import org.telegram.telegrambots.meta.api.objects.chatmember.ChatMember;
@@ -268,8 +268,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 	
 	// Работа с обновлениями //
 	@Override
-	public void onUpdateReceived 
-	(Update update) { 
+	public void onUpdateReceived(Update update) {
 				
 		// Методы отправки сообщений //
 		if (update.hasMessage()&& update.getMessage().hasText()) {
@@ -313,7 +312,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 	}
 	
 	// Методы ответов //
-	private void startAnswer // <- Ответ на /start 
+	private void startAnswer // <- Ответ на /start
 	(Update update) {
 		String messageText = 
 				"Салут дружище, я бот - помощник замечательного канала - *@u_bablo*\r\n"
@@ -423,8 +422,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 
 
 	// Методы "скана" //
-	private void tierScaner 
-	(Update update) throws SQLException {
+	private void tierScaner(Update update) throws SQLException {
 		if(tierScan == true && update.getMessage().getText().toLowerCase().equals("exit") == false) {
 			String foundTier = new SQLfoundtier().getTierOfFound(update.getMessage().getText().toLowerCase());
 			

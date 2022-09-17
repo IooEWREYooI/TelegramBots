@@ -8,7 +8,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import static Telegram.Bots.BotsApplication.isTest;
 import static config.BotsConfig.*;
 
-
 public class U_32_bot extends TelegramLongPollingBot {
     String text = "Такой команды нет, я только для расписания предназначен...\n"
             + "\n*Даже у меня есть смысл существования, а у тебя?*";

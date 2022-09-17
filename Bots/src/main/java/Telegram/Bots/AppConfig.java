@@ -9,8 +9,6 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import service.U_32_bot;
 import service.u_bablo_bot;
 
-import java.util.Scanner;
-
 @Configuration
 public class AppConfig {
 

@@ -44,19 +44,23 @@
     	</dependency>
     	
     	<!-- MySQL connector -->
-	<dependency>
-		<groupId>mysql</groupId>
-		   <artifactId>mysql-connector-java</artifactId>
-		 <version>8.0.29</version><!--$NO-MVN-MAN-VER$-->
-	</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	
 	<!-- HTML to Markdown converter -->
-	<dependency>
-        <groupId>io.github.furstenheim</groupId>
-        <artifactId>copy_down</artifactId>
-        <version>1.1</version>
-    </dependency>
-		
+		<dependency>
+			<groupId>io.github.furstenheim</groupId>
+				<artifactId>copy_down</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
