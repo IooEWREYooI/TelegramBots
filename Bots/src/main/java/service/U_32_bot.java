@@ -5,8 +5,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import static config.BotsConfig.U_32_bot_NAME;
-import static config.BotsConfig.U_32_bot_TOKEN;
+import static Telegram.Bots.BotsApplication.isTest;
+import static config.BotsConfig.*;
 
 
 public class U_32_bot extends TelegramLongPollingBot {
@@ -97,10 +97,16 @@ public class U_32_bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
+        if (isTest) {
+            return U_32_bot_NAME_TEST;
+        }
         return U_32_bot_NAME;
     }
     @Override
     public String getBotToken() {
+        if (isTest){
+            return U_32_bot_TOKEN_TEST;
+        }
         return U_32_bot_TOKEN;
     }
     public void sendMessage(Update update, String text) {

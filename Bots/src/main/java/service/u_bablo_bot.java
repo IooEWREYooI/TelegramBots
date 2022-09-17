@@ -18,8 +18,8 @@ import org.telegram.telegrambots.meta.api.objects.chatmember.ChatMember;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import static config.BotsConfig.u_bablo_bot_NAME;
-import static config.BotsConfig.u_bablo_bot_TOKEN;
+import static Telegram.Bots.BotsApplication.isTest;
+import static config.BotsConfig.*;
 
 public class u_bablo_bot extends TelegramLongPollingBot {
 	public boolean tierScan = false; // <- Скан для /tier отключен
@@ -27,13 +27,17 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 	
 	// Данные бота //
 	@Override
-	public String getBotUsername() // <- username бота без @ 
-	{
+	public String getBotUsername() {
+		if (isTest){
+			return u_bablo_bot_NAME_TEST;
+		}
 		return u_bablo_bot_NAME;
 	}
 	@Override
-	public String getBotToken() // <- Токен бота 
-	{
+	public String getBotToken() {
+		if (isTest){
+			return u_bablo_bot_TOKEN_TEST;
+		}
 		return u_bablo_bot_TOKEN;
 	}
 	
