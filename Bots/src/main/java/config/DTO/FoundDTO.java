@@ -12,8 +12,6 @@ public class FoundDTO {
     private int tier;
     private String description;
     private String shortDescription;
-    private double[] avgPriceChange;
-    private String[] images;
     private int gainers;
     private int losers;
     private double dominance;
@@ -23,16 +21,19 @@ public class FoundDTO {
     public FoundDTO(JsonObject obj){
        this.id = obj.getAsJsonPrimitive("id").getAsLong();
        this.name = obj.getAsJsonPrimitive("name").getAsString();
-/*     this.tier = obj.getAsJsonPrimitive("tier").getAsInt();
 
-       if (!obj.getAsJsonPrimitive("description").isJsonNull())
+       if (obj.get("tier").isJsonNull() == false)
+       this.tier = obj.getAsJsonPrimitive("tier").getAsInt();
+       else this.tier = 0;
+
+       if (obj.get("description").isJsonNull() == false)
        this.description = obj.getAsJsonPrimitive("description").getAsString();
-       else this.description = null;
+       else this.description = "Нет";
 
-       if (!obj.getAsJsonPrimitive("shortDescription").isJsonNull())
+       if (obj.get("shortDescription").isJsonNull() == false )
        this.shortDescription = obj.getAsJsonPrimitive("shortDescription").getAsString();
-       else this.shortDescription = null;
-*/
+       else this.shortDescription = "Нет";
+
        this.gainers = obj.getAsJsonPrimitive("gainers").getAsInt();
        this.losers = obj.getAsJsonPrimitive("losers").getAsInt();
        this.dominance = obj.getAsJsonPrimitive("dominance").getAsDouble();
