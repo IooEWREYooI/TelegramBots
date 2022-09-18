@@ -13,6 +13,32 @@ import java.net.URLConnection;
 import java.util.*;
 
 public class API_Founds {
+    public JsonReader OpenConnection(){
+        JsonReader json = null;
+        try {
+            URL url = new URL("https://api.cryptorank.io/v0/coin-funds?withSummary=true");
+            URLConnection connection = url.openConnection();
+            json = new JsonReader(new InputStreamReader(connection.getInputStream()));
+            return json;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NullPointerException();
+        }
+    }
+    public ArrayList<FoundDTO> getListOfFounds() {
+        JsonReader json = OpenConnection();
+        JsonElement jsonElement = JsonParser.parseReader(json);
+        JsonObject rootObject = jsonElement.getAsJsonObject();
+        JsonArray data = rootObject.getAsJsonArray("data");
+
+        Iterator<JsonElement> dataIterable = data.iterator();
+        ArrayList<FoundDTO> foundsList = new ArrayList<>();
+
+        while (dataIterable.hasNext()){
+            foundsList.add(new FoundDTO(dataIterable.next().getAsJsonObject()));
+        }
+        return foundsList;
+    }
     public ArrayList<FoundDTO> foundByNameContains(String word) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         ArrayList<FoundDTO> listOfFoundsWhoIsContains = new ArrayList<FoundDTO>();
@@ -61,26 +87,5 @@ public class API_Founds {
         if (foundsIdsList.size() > 0)
             return foundsIdsList;
         else throw new NullPointerException();
-    }
-    public ArrayList<FoundDTO> getListOfFounds() {
-        JsonReader json = null;
-        try {
-            URL url = new URL("https://api.cryptorank.io/v0/coin-funds?withSummary=true");
-            URLConnection connection = url.openConnection();
-            json = new JsonReader(new InputStreamReader(connection.getInputStream()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JsonElement jsonElement = JsonParser.parseReader(json);
-        JsonObject rootObject = jsonElement.getAsJsonObject();
-        JsonArray data = rootObject.getAsJsonArray("data");
-
-        Iterator<JsonElement> dataIterable = data.iterator();
-        ArrayList<FoundDTO> foundsList = new ArrayList<>();
-
-        while (dataIterable.hasNext()){
-            foundsList.add(new FoundDTO(dataIterable.next().getAsJsonObject()));
-        }
-        return foundsList;
     }
 }

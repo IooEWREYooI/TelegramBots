@@ -3,7 +3,6 @@ package config.DTO;
 
 import com.google.gson.JsonObject;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class FoundDTO {
