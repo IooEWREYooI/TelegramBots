@@ -9,9 +9,8 @@ public class BotsApplication {
 
 	public static boolean isTest;
 
-	public static void main(String[] args) throws ClassNotFoundException {
+	static {
 		Scanner console = new Scanner(System.in);
-
 		System.out.println("Test? Y/N");
 		String answer = console.nextLine();
 		if (answer.equalsIgnoreCase("Y")){
@@ -19,9 +18,10 @@ public class BotsApplication {
 		} else if (answer.equalsIgnoreCase("N")) {
 			isTest = false;
 		}
+	}
 
+	public static void main(String[] args) {
 		SpringApplication.run(AppConfig.class);
-
 	}
 
 }

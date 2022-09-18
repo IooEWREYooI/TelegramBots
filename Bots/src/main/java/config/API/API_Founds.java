@@ -13,7 +13,7 @@ import java.net.URLConnection;
 import java.util.*;
 
 public class API_Founds {
-    public ArrayList<FoundDTO> foundByNameContains(String word){
+    public ArrayList<FoundDTO> foundByNameContains(String word) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         ArrayList<FoundDTO> listOfFoundsWhoIsContains = new ArrayList<FoundDTO>();
         while(foundsList.hasNext()){
@@ -36,7 +36,7 @@ public class API_Founds {
         }
         throw new NullPointerException();
     }
-    public FoundDTO foundById(long id){
+    public FoundDTO foundById(long id) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         while(foundsList.hasNext()){
             FoundDTO found = foundsList.next();
@@ -46,7 +46,7 @@ public class API_Founds {
         }
         throw new NullPointerException();
     }
-    public ArrayList<FoundDTO> foundByIds(ArrayList<Integer> listOfIds){
+    public ArrayList<FoundDTO> foundByIds(ArrayList<Integer> listOfIds) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         ArrayList<FoundDTO> foundsIdsList = new ArrayList<>();
         Iterator<Integer> iterableFoundsIds = listOfIds.iterator();
