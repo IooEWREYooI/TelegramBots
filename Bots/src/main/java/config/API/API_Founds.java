@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.sun.istack.NotNull;
 import config.DTO.FoundDTO;
 
 import java.io.*;
@@ -12,8 +13,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
 
+/**
+ * Утильный класс для получения данных из API
+ * <a href="https/t.me/u_bablo"><strong>Канал автора</strong></a>
+ @throw NullPointerException
+ @author @lllooEWREYoolll
+ */
 public class API_Founds {
-    public JsonReader OpenConnection(){
+    private JsonReader OpenConnection(){
         JsonReader json = null;
         try {
             URL url = new URL("https://api.cryptorank.io/v0/coin-funds?withSummary=true");
@@ -39,7 +46,7 @@ public class API_Founds {
         }
         return foundsList;
     }
-    public ArrayList<FoundDTO> foundByNameContains(String word) {
+    public ArrayList<FoundDTO> foundByNameContains(@NotNull String word) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         ArrayList<FoundDTO> listOfFoundsWhoIsContains = new ArrayList<FoundDTO>();
         while(foundsList.hasNext()){
@@ -52,7 +59,7 @@ public class API_Founds {
             return listOfFoundsWhoIsContains;
         } else throw new NullPointerException();
     }
-    public FoundDTO foundByName(String name) {
+    public FoundDTO foundByName(@NotNull String name) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         while(foundsList.hasNext()){
             FoundDTO found = foundsList.next();
@@ -62,7 +69,7 @@ public class API_Founds {
         }
         throw new NullPointerException();
     }
-    public FoundDTO foundById(long id) {
+    public FoundDTO foundById(@NotNull long id) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         while(foundsList.hasNext()){
             FoundDTO found = foundsList.next();
@@ -72,7 +79,7 @@ public class API_Founds {
         }
         throw new NullPointerException();
     }
-    public ArrayList<FoundDTO> foundByIds(ArrayList<Integer> listOfIds) {
+    public ArrayList<FoundDTO> foundByListOfIds(ArrayList<Integer> listOfIds) {
         Iterator<FoundDTO> foundsList = new API_Founds().getListOfFounds().iterator();
         ArrayList<FoundDTO> foundsIdsList = new ArrayList<>();
         Iterator<Integer> iterableFoundsIds = listOfIds.iterator();
