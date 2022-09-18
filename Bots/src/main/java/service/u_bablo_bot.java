@@ -1,6 +1,5 @@
 package service;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -170,7 +169,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 			}
 	}
 	private void sendMessageWithMarketsInlineButtoms // <- Отправка сообщений со ссылками на биржи 
-	(long chatId,ArrayList<String> markets,String coinId) throws IOException {
+	(long chatId,ArrayList<String> markets, String coinId) throws IOException {
 		String text = "Ошибка";
 		 InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
 	     List<List<InlineKeyboardButton>> rowList = new ArrayList<>(); // Создание спикска кнопок??
@@ -293,7 +292,13 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 					 if (command.equals("/start")) startAnswer(update);
 				else if (command.equals("/dream")) dreamAnswer(update);
 				else if (command.equals("/tier")) tierAnswer(update); 
-				else if (command.startsWith("$")) { try {coinAnswer(update);} catch (IOException | SQLException e) {e.printStackTrace();} }
+				else if (command.startsWith("$")) {
+                    try {
+                        coinAnswer(update);
+                    } catch (IOException | SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
 			}
 			// Получение сообщения и преобразование в String (скан ответа, для подписанных) //
 			else if (tierScan == true && memberTrue || adminTrue || creatorTrue) {
@@ -318,8 +323,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 	}
 	
 	// Методы ответов //
-	private void startAnswer // <- Ответ на /start
-	(Update update) {
+	private void startAnswer(Update update) /* <- Ответ на /start */ {
 		String messageText = 
 				"Салут дружище, я бот - помощник замечательного канала - *@u_bablo*\n"
 				+ "\n"
@@ -341,8 +345,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 				+ "\nПиши мне *@oolllEwreyllloo*";
 		sendMessage(update,messageText,true);
 	}
-	private void dreamAnswer // <- Ответ на /dream 
-	(Update update) {
+	private void dreamAnswer(Update update) /* <- Ответ на /dream */  {
 		String messageText = 
 				"*О-хо-хо* на этого бота у меня грандиозные планы и на 60% они уже осуществимы \n"
 				+ "\n"
@@ -367,8 +370,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 				+ "\nПиши мне *@oolllEwreyllloo*";
 		sendMessage(update, messageText, false);
 	}
-	private void tierAnswer // <- Ответ на /tier 
-	(Update update) {
+	private void tierAnswer(Update update) /* <- Ответ на /tier */ {
 		String textMessage = 
 				"*Хочешь узнать тир фонда?*\n"
 				+ "_Ты по адресу, поздравляю!_\n"
@@ -387,8 +389,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 		tierScan = true;
 		tierTurn = true;
 	}
-	private void coinAnswer // <- Ответ на сообщение начинающееся с $ ($BTC и тому подобное) 
-	(Update update) throws IOException, SQLException {
+	private void coinAnswer(Update update) throws IOException, SQLException /* <- Ответ на сообщение начинающееся с $ ($BTC и тому подобное) */{
 		ArrayList<String> markets = new ArrayList<String>();
 		String coins = update.getMessage().getText();
 		StringBuilder coin = new StringBuilder(coins);
@@ -415,8 +416,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 		}
 		
 	}
-	private void answerToListIds // <- Ответ если найдено несколько монет по одному символу 
-	(Update update, String id) throws ConnectException, IOException {
+	private void answerToListIds(Update update, String id) throws IOException /* <- Ответ если найдено несколько монет по одному символу */{
 			ArrayList<String> markets = new ArrayList<String>();
 			sendMessage(update.getCallbackQuery().getMessage().getChatId(), new API_CoinGeko().API_CoinGeko_coin(id), false); // <- Информация по монете
 			sendMessage(update.getCallbackQuery().getMessage().getChatId(), new API_CoinGeko().API_CoinGeko_coin_description(id), false); // <- Описание монеты
@@ -479,8 +479,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 	}
 	
 	// Пользователь не подписан //
-	private void userNotMember 
-	(Update update) {
+	private void userNotMember(Update update) {
 		tierScan = false;
 		sendInlineKeyBoardMessageWithUrl(update, 
 				"*Салут*, хочешь испытать все прелести одного из крутейших _(в"
