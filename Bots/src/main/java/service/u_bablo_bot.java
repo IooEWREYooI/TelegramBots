@@ -20,6 +20,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import static Telegram.Bots.BotsApplication.isTest;
 import static config.BotsConfig.*;
 
+/**
+ *  <a href="https/t.me/u_bablo"><strong>Канал автора</strong></a>
+ *  <p>Бот - обзорщик криптовалют, режим <strong>"скана"</strong> работает оч криво, надо бы пофиксить</p>
+ *  <p>А так же перенести бота на Jackson с GSON</p>
+ *  @author @lllooEWREYoolll
+ */
 public class u_bablo_bot extends TelegramLongPollingBot {
 	public boolean tierScan = false; // <- Скан для /tier отключен
 	public boolean tierTurn = false; // <- Сканирование запущено, когда оно запущено, сообщение о том что человек - не подписчик, не отправляется
@@ -370,6 +376,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 				+ "\nПиши мне *@oolllEwreyllloo*";
 		sendMessage(update, messageText, false);
 	}
+	@Deprecated
 	private void tierAnswer(Update update) /* <- Ответ на /tier */ {
 		String textMessage = 
 				"*Хочешь узнать тир фонда?*\n"
@@ -428,6 +435,7 @@ public class u_bablo_bot extends TelegramLongPollingBot {
 
 
 	// Методы "скана" //
+	@Deprecated
 	private void tierScaner(Update update) throws SQLException {
 		if(tierScan == true && update.getMessage().getText().toLowerCase().equals("exit") == false) {
 			String foundTier = new SQLfoundtier().getTierOfFound(update.getMessage().getText().toLowerCase());
