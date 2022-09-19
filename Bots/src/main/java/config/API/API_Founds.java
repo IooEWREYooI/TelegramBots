@@ -9,8 +9,7 @@ import com.sun.istack.NotNull;
 import config.DTO.FoundDTO;
 
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.util.*;
 
 /**

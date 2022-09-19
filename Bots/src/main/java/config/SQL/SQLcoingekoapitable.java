@@ -7,12 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import static config.BotsConfig.SQL_PASSWORD;
+
 public class SQLcoingekoapitable {
 
     /////// JDBC URL, username и пароль от MySQL ///////
     private static final String url = "jdbc:mysql://localhost:3306/coingekoapitable"; // <- Имя БД
     private static final String user = "root"; // Default
-    private static final String password = "YOUR_PASSWORD";
+    private static final String password = SQL_PASSWORD;
     public ArrayList<String> table = new ArrayList<>();
     
     /////// JDBC варианты для открытия и изменения подключения ///////

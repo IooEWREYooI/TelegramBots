@@ -17,6 +17,35 @@ public class FoundDTO {
     private double marketCap;
     private double volume24h;
 
+    @Override
+    public String toString(){
+        if(!this.getDescription().equals("Нет"))
+            return  "Имя фонда - "+this.getName()+"\n"+
+                    "Тир фонда - "+this.getTier()+"\n"+
+                    "Описание - "+this.getDescription()+"\n"+
+                    "Удавшиеся вложения - "+this.getGainers()+"\n"+
+                    "Неудавшиеся вложения - "+this.getLosers()+"\n"+
+                    "Доминация на рынке в % - "+this.getDominance()+"\n"+
+                    "Капитализация фонда - "+this.getMarketCap()+"$\n"+
+                    "Объем торгов за 24ч - "+this.getVolume24h()+"$";
+        else if (!this.getShortDescription().equals("Нет"))
+            return  "Имя фонда - "+this.getName()+"\n"+
+                    "Тир фонда - "+this.getTier()+"\n"+
+                    "Описание - "+this.getShortDescription()+"\n"+
+                    "Удавшиеся вложения - "+this.getGainers()+"\n"+
+                    "Неудавшиеся вложения - "+this.getLosers()+"\n"+
+                    "Доминация на рынке в % - "+this.getDominance()+"\n"+
+                    "Капитализация фонда - "+this.getMarketCap()+"$\n"+
+                    "Объем торгов за 24ч - "+this.getVolume24h()+"$";
+        else return "Имя фонда - "+this.getName()+"\n"+
+                    "Тир фонда - "+this.getTier()+"\n"+
+                    "Удавшиеся вложения - "+this.getGainers()+"\n"+
+                    "Неудавшиеся вложения - "+this.getLosers()+"\n"+
+                    "Доминация на рынке в % - "+this.getDominance()+"\n"+
+                    "Капитализация фонда - "+this.getMarketCap()+"$\n"+
+                    "Объем торгов за 24ч - "+this.getVolume24h()+"$";
+    }
+
     public FoundDTO(JsonObject obj){
        this.id = obj.getAsJsonPrimitive("id").getAsLong();
        this.name = obj.getAsJsonPrimitive("name").getAsString();
