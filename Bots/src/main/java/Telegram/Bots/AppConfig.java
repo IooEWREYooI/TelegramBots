@@ -1,11 +1,11 @@
 package Telegram.Bots;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -13,8 +13,10 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import Telegram.Bots.service.U_32_bot;
 import Telegram.Bots.service.u_bablo_bot;
 @Configuration
-@ComponentScan("Telegram.Bots.service")
+@ComponentScan("Telegram.Bots")
 public class AppConfig {
+    private Logger log = LoggerFactory.getLogger(AppConfig.class);
+
     @Autowired
     u_bablo_bot u_bablo_bot = new u_bablo_bot();
     @Autowired
@@ -35,9 +37,9 @@ public class AppConfig {
             TelegramBotsApi TelegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             TelegramBotsApi.registerBot(bot);
         } catch(TelegramApiException e) {
-            System.out.println("Ошибка в "+bot.getBotUsername());
+            log.error("Ошибка в {} \n", bot.getBotUsername());
             e.printStackTrace();
         }
-        System.out.println("Бот "+bot.getBotUsername()+" -> успешно запущен");
+        log.info("Бот {} -> успешно запущен", bot.getBotUsername());
     }
 }
