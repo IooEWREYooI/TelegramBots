@@ -1,30 +1,36 @@
 package Telegram.Bots;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import service.U_32_bot;
-import service.u_bablo_bot;
-
+import Telegram.Bots.service.U_32_bot;
+import Telegram.Bots.service.u_bablo_bot;
 @Configuration
+@ComponentScan("Telegram.Bots.service")
 public class AppConfig {
-
-    public boolean Test = true;
+    @Autowired
+    u_bablo_bot u_bablo_bot = new u_bablo_bot();
+    @Autowired
+    U_32_bot U_32_bot = new U_32_bot();
 
     @Bean
     public void u_bablo_bot_reg(){
-        registartion(new u_bablo_bot());
+        registartion(u_bablo_bot);
     }
 
     @Bean
     public void U_32_bot_reg(){
-        registartion(new U_32_bot());
+        registartion(U_32_bot);
     }
 
-    public void registartion(TelegramLongPollingBot bot){
+    private void registartion(TelegramLongPollingBot bot){
         try {
             TelegramBotsApi TelegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             TelegramBotsApi.registerBot(bot);
