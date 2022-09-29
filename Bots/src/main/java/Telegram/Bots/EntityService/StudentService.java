@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StudentService {
-    @Autowired(required=true)
+    @Autowired
     StudentRepo repo;
 
     public void add(StudentEntity entity){
@@ -19,9 +19,8 @@ public class StudentService {
            return true;
        else return false;
     }
-/*
-    public boolean inTable(StudentEntity entity){
-        return repo.existsByUserIdIs(entity.getUser_id());
+
+    public Iterable<StudentEntity> getList(){
+        return repo.findAll();
     }
-*/
 }

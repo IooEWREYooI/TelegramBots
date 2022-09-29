@@ -26,31 +26,31 @@ import static Telegram.Bots.config.BotsConfig.*;
 @Component
 public class U_32_bot extends TelegramLongPollingBot {
 
-    @Autowired(required=true)
+    @Autowired
     StudentService service = new StudentService();
 
     private Logger log = LoggerFactory.getLogger(U_32_bot.class);
 
     String text = "Такой команды нет, я только для расписания предназначен...\n"
             + "\n*Даже у меня есть смысл существования, а у тебя?*";
-    String MONDAY = createDay(DayOfWeek.MONDAY.getTitle(), Lections.FNP.getLection(), Teachers.BAA.getTeacher(),
+    public String MONDAY = createDay(DayOfWeek.MONDAY.getTitle(), Lections.FNP.getLection(), Teachers.BAA.getTeacher(),
     Lections.PSO.getLection(), Teachers.SMI.getTeacher(), Lections.PFR.getLection(), Teachers.KEV.getTeacher(),
             Lections.PSO.getLection(), Teachers.SMI.getTeacher());
-    String TUESDAY = createDay(DayOfWeek.TUESDAY.getTitle(), Lections.INF.getLection(), Teachers.KDI.getTeacher(),
+    public String TUESDAY = createDay(DayOfWeek.TUESDAY.getTitle(), Lections.INF.getLection(), Teachers.KDI.getTeacher(),
     Lections.STR.getLection(), Teachers.BAA.getTeacher(), Lections.PFR.getLection(), Teachers.KEV.getTeacher(),
     Lections.GPR.getLection(), Teachers.KAA.getTeacher());
 
-    String WEDNESDAY = createDay(DayOfWeek.WEDNESDAY.getTitle(), Lections.NAN.getLection(), Teachers.NAN.getTeacher(), Lections.FNP.getLection(),
+    public String WEDNESDAY = createDay(DayOfWeek.WEDNESDAY.getTitle(), Lections.NAN.getLection(), Teachers.NAN.getTeacher(), Lections.FNP.getLection(),
             Teachers.BAA.getTeacher(), Lections.TRP.getLection(), Teachers.ZEV.getTeacher(), Lections.ANG.getLection(), Teachers.KDI.getTeacher());
-    String THURSDAY = createDay(DayOfWeek.THURSDAY.getTitle(), Lections.FNP.getLection(),
+    public String THURSDAY = createDay(DayOfWeek.THURSDAY.getTitle(), Lections.FNP.getLection(),
             Teachers.BAA.getTeacher(), Lections.PSO.getLection(), Teachers.SMI.getTeacher(), Lections.PHI.getLection(), Teachers.ZEV.getTeacher(),
     Lections.MEN.getLection(), Teachers.NNN.getTeacher());
-    String FRIDAY = createFriday(DayOfWeek.FRIDAY.getTitle(),Lections.NAN.getLection(), Teachers.NAN.getTeacher(),
+    public String FRIDAY = createFriday(DayOfWeek.FRIDAY.getTitle(),Lections.NAN.getLection(), Teachers.NAN.getTeacher(),
             Lections.GPR.getLection(), Teachers.KAA.getTeacher(), Lections.PFR.getLection(),
     Teachers.KEV.getTeacher(), Lections.TRP.getLection(), Teachers.ZEL.getTeacher());
 
     @Override
-    public void onUpdateReceived(Update update) {
+    public void onUpdateReceived(Update update){
         log.info("Получено сообщение от {} с текстом : {}", update.getMessage().getFrom().getFirstName(), update.getMessage().getText());
         LocalDate now = LocalDate.now();
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -80,15 +80,33 @@ public class U_32_bot extends TelegramLongPollingBot {
                 sendMessage(update, text);
             }
             else if (command.equals("/start")) {
-                text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
+                if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.TUESDAY){
+                    text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
+                            + "\nПример: \n"
+                            + "\n" + TUESDAY;
+                } else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.WEDNESDAY){
+                    text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
+                            + "\nПример: \n"
+                            + "\n" + WEDNESDAY;
+                } else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.THURSDAY){
+                    text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
+                            + "\nПример: \n"
+                            + "\n" + THURSDAY;
+                } else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.FRIDAY){
+                    text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
+                            + "\nПример: \n"
+                            + "\n" + FRIDAY;
+                } else text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
                         + "\nПример: \n"
-                        + "\n"+MONDAY;
+                        + "\n" + MONDAY;
                 sendMessage(update, text);
+            }
+            else if (command.equalsIgnoreCase("Список")){
+                sendMessage(update, service.getList().toString());
             }
             else sendMessage(update, text);
         }
     }
-
     public String createDay(String... args){
         return String.format(
                 "*%s* \n\n" +
@@ -181,6 +199,7 @@ public class U_32_bot extends TelegramLongPollingBot {
                             .build());
         }
         catch (TelegramApiException e) {
+            log.error(e.getMessage());
             e.printStackTrace();
         }
 

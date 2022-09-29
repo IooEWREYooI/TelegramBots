@@ -22,16 +22,23 @@ public class SQLcoingekoapitable {
     private static Statement stmt;
     private static ResultSet rs;
     
-    public ArrayList<String> idOfCrypto (String symbol) throws SQLException {
+    public ArrayList<String> idOfCrypto (String symbol) {
     String query = "SELECT id FROM coingekoapitable WHERE symbol = '"+symbol.toLowerCase()+"'";
 	ArrayList<String> id = new ArrayList<String>();
-	
-	con = DriverManager.getConnection(url, user, password);
-	stmt = con.createStatement();
-	rs = stmt.executeQuery(query);
-	while(rs.next()) {
-			id.add(rs.getString(1));
-		}
-	return id;
+        try {
+            con = DriverManager.getConnection(url, user, password);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id.add(rs.getString(1));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            try {con.close();} catch (SQLException e){e.printStackTrace();}
+            try {stmt.close();} catch (SQLException e){e.printStackTrace();}
+            try {rs.close();} catch (SQLException e){e.printStackTrace();}
+            return id;
+        }
     }
 }

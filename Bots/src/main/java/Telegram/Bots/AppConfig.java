@@ -12,11 +12,13 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import Telegram.Bots.service.U_32_bot;
 import Telegram.Bots.service.u_bablo_bot;
+
+import java.util.Arrays;
+
 @Configuration
 @ComponentScan("Telegram.Bots")
 public class AppConfig {
     private Logger log = LoggerFactory.getLogger(AppConfig.class);
-
     @Autowired
     u_bablo_bot u_bablo_bot = new u_bablo_bot();
     @Autowired
@@ -36,10 +38,10 @@ public class AppConfig {
         try {
             TelegramBotsApi TelegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             TelegramBotsApi.registerBot(bot);
+            log.info("Бот {} -> успешно запущен", bot.getBotUsername());
         } catch(TelegramApiException e) {
             log.error("Ошибка в {} \n", bot.getBotUsername());
-            e.printStackTrace();
+            Arrays.stream(e.getStackTrace()).forEach(x -> log.error(x.toString()));
         }
-        log.info("Бот {} -> успешно запущен", bot.getBotUsername());
     }
 }

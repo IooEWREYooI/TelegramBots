@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="WINDOWS-DIR" value="\\IdeaProjects\\TelegramBots\\Bots\\src\\main\\resources\\logs.log"/>
+    <property name="pattern" value="%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n"/>
+    <property name="pattern-color" value="%highlight(%d{dd.MM.yyyy HH:mm:ss.SSS}) [%thread] %yellow(%-5level %logger) - %green(%msg%n)"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern-color}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${user.home}${WINDOWS-DIR}</file>
+        <append>false</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${pattern}</pattern>
+        </layout>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

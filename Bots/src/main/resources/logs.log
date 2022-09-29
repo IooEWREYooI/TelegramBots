@@ -1,0 +1,27 @@
+29.09.2022 18:27:39.747 [main] WARN  org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/yasha/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/yasha/.m2/repository/org/json/json/20220320/json-20220320.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+29.09.2022 18:27:39.794 [main] INFO  Telegram.Bots.BotsApplicationTests - Starting BotsApplicationTests using Java 18.0.2.1 on EwreyTrade with PID 8480 (started by yasha in C:\Users\yasha\IdeaProjects\TelegramBots\Bots)
+29.09.2022 18:27:39.797 [main] INFO  Telegram.Bots.BotsApplicationTests - No active profile set, falling back to 1 default profile: "default"
+29.09.2022 18:27:41.577 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+29.09.2022 18:27:41.724 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 122 ms. Found 1 JPA repository interfaces.
+29.09.2022 18:27:43.894 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+29.09.2022 18:27:44.114 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.10.Final
+29.09.2022 18:27:44.645 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+29.09.2022 18:27:45.046 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+29.09.2022 18:27:46.317 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+29.09.2022 18:27:46.408 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+29.09.2022 18:27:49.430 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+29.09.2022 18:27:49.459 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+29.09.2022 18:27:51.672 [main] INFO  Telegram.Bots.AppConfig - Бот u_bablo_bot -> успешно запущен
+29.09.2022 18:27:51.860 [main] INFO  Telegram.Bots.AppConfig - Бот U32_bot -> успешно запущен
+29.09.2022 18:27:52.768 [main] INFO  Telegram.Bots.BotsApplicationTests - Started BotsApplicationTests in 14.105 seconds (JVM running for 19.029)
+29.09.2022 18:27:53.559 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+29.09.2022 18:27:53.566 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+29.09.2022 18:27:53.730 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
