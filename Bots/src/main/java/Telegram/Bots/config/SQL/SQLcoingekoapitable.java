@@ -1,6 +1,9 @@
 package Telegram.Bots.config.SQL;
 
 import Telegram.Bots.config.BotsConfig;
+import Telegram.Bots.service.u_bablo_bot;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SQLcoingekoapitable {
+    int error = 0;
+    private Logger log = LoggerFactory.getLogger(SQLcoingekoapitable.class);
 
     /////// JDBC URL, username и пароль от MySQL ///////
     private static final String url = "jdbc:mysql://localhost:3306/coingekoapitable"; // <- Имя БД
@@ -35,9 +40,15 @@ public class SQLcoingekoapitable {
         } catch (SQLException e){
             e.printStackTrace();
         } finally {
-            try {con.close();} catch (SQLException e){e.printStackTrace();}
-            try {stmt.close();} catch (SQLException e){e.printStackTrace();}
-            try {rs.close();} catch (SQLException e){e.printStackTrace();}
+            try {con.close();} catch (SQLException e){log.error(e.getMessage()); error++;}
+            try {stmt.close();} catch (SQLException e){log.error(e.getMessage()); error++;}
+            try {rs.close();} catch (SQLException e){log.error(e.getMessage()); error++;}
+            if (error == 0)
+            log.info("Закрытие ->  успешно");
+            else {
+                log.error("Закрытие -> не успешно");
+                error = 0;
+            }
             return id;
         }
     }

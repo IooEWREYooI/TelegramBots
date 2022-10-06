@@ -5,6 +5,8 @@ import java.util.*;
 
 import Telegram.Bots.config.API.API_Founds;
 import Telegram.Bots.config.DTO.FoundDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -33,7 +35,7 @@ import static Telegram.Bots.config.BotsConfig.*;
 @Component
 @PropertySource("application.properties")
 public class u_bablo_bot extends TelegramLongPollingBot {
-
+	private Logger log = LoggerFactory.getLogger(u_bablo_bot.class);
 	// Данные бота //
 	@Override
 	public String getBotUsername() {

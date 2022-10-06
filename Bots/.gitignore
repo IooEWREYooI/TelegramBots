@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 Enums/
+*.log
 
 ### STS ###
 .apt_generated
@@ -35,3 +36,5 @@ build/
 
 BotsConfig.class
 BotsConfig.java
+*.txt
+garik_bot.java

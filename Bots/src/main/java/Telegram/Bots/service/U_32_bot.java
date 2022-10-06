@@ -1,13 +1,7 @@
 package Telegram.Bots.service;
 
-import Telegram.Bots.EntityService.StudentService;
-import Telegram.Bots.config.Entity.StudentEntity;
-import Telegram.Bots.config.Enums.DayOfWeek;
-import Telegram.Bots.config.Enums.Lections;
-import Telegram.Bots.config.Enums.Teachers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,122 +11,143 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import static Telegram.Bots.BotsApplication.getPathsWithCalendarFiles;
 import static Telegram.Bots.BotsApplication.isTest;
 import static Telegram.Bots.config.BotsConfig.*;
+
 @Component
 public class U_32_bot extends TelegramLongPollingBot {
 
-    @Autowired
-    StudentService service = new StudentService();
-
     private Logger log = LoggerFactory.getLogger(U_32_bot.class);
 
-    String text = "Такой команды нет, я только для расписания предназначен...\n"
-            + "\n*Даже у меня есть смысл существования, а у тебя?*";
-    public String MONDAY = createDay(DayOfWeek.MONDAY.getTitle(), Lections.FNP.getLection(), Teachers.BAA.getTeacher(),
-    Lections.PSO.getLection(), Teachers.SMI.getTeacher(), Lections.PFR.getLection(), Teachers.KEV.getTeacher(),
-            Lections.PSO.getLection(), Teachers.SMI.getTeacher());
-    public String TUESDAY = createDay(DayOfWeek.TUESDAY.getTitle(), Lections.INF.getLection(), Teachers.KDI.getTeacher(),
-    Lections.STR.getLection(), Teachers.BAA.getTeacher(), Lections.PFR.getLection(), Teachers.KEV.getTeacher(),
-    Lections.GPR.getLection(), Teachers.KAA.getTeacher());
-
-    public String WEDNESDAY = createDay(DayOfWeek.WEDNESDAY.getTitle(), Lections.NAN.getLection(), Teachers.NAN.getTeacher(), Lections.FNP.getLection(),
-            Teachers.BAA.getTeacher(), Lections.TRP.getLection(), Teachers.ZEV.getTeacher(), Lections.ANG.getLection(), Teachers.KDI.getTeacher());
-    public String THURSDAY = createDay(DayOfWeek.THURSDAY.getTitle(), Lections.FNP.getLection(),
-            Teachers.BAA.getTeacher(), Lections.PSO.getLection(), Teachers.SMI.getTeacher(), Lections.PHI.getLection(), Teachers.ZEV.getTeacher(),
-    Lections.MEN.getLection(), Teachers.NNN.getTeacher());
-    public String FRIDAY = createFriday(DayOfWeek.FRIDAY.getTitle(),Lections.NAN.getLection(), Teachers.NAN.getTeacher(),
-            Lections.GPR.getLection(), Teachers.KAA.getTeacher(), Lections.PFR.getLection(),
-    Teachers.KEV.getTeacher(), Lections.TRP.getLection(), Teachers.ZEL.getTeacher());
+    String text = "";
 
     @Override
     public void onUpdateReceived(Update update){
         log.info("Получено сообщение от {} с текстом : {}", update.getMessage().getFrom().getFirstName(), update.getMessage().getText());
-        LocalDate now = LocalDate.now();
         if (update.hasMessage() && update.getMessage().hasText()) {
             String command = update.getMessage().getText();
             if (command.equalsIgnoreCase("Понедельник")) {
-                text = MONDAY;
-                sendMessage(update, text);
+                sendMessage(update, getTextFromFile("monday.txt"));
             }
             else if (command.equalsIgnoreCase("Вторник")) {
-                text = TUESDAY;
-                sendMessage(update, text);
+                sendMessage(update, getTextFromFile("tuesday.txt"));
             }
             else if (command.equalsIgnoreCase("Среда")) {
-                text = 	WEDNESDAY;
-                sendMessage(update, text);
+                sendMessage(update, getTextFromFile("wednesday.txt"));
             }
             else if (command.equalsIgnoreCase("Четверг")) {
-                text = THURSDAY;
-                sendMessage(update, text);
+                sendMessage(update, getTextFromFile("thursday.txt"));
             }
             else if (command.equalsIgnoreCase("Пятница")) {
-                text = FRIDAY;
-                sendMessage(update, text);
+                sendMessage(update, getTextFromFile("friday.txt"));
             }
             else if (command.toUpperCase().contains("ЯША") || command.toUpperCase().contains("ЯКОВ")|| command.toUpperCase().contains("ЯШКА")) {
                 text = "_О нет, ты написал про того, чье имя нельзя называть..._\n";
                 sendMessage(update, text);
             }
+            else if (update.getMessage().getFrom().getUserName().equals("oolllEWREYllloo") && command.startsWith("/update ")){
+                var commandList = Arrays.stream(command.split(" ")).toList();
+                var commandIter = Arrays.stream(command.split(" ")).toList().subList(2, Arrays.stream(command.split(" ")).toList().size() - 1).iterator();
+                StringBuilder textBuilder = new StringBuilder();
+                if (commandList.get(1).equalsIgnoreCase("понедельник")){
+                    while(commandIter.hasNext())
+                        textBuilder.append(commandIter.next()+" ");
+                    saveText(getPathsWithCalendarFiles+"monday.txt", textBuilder.toString());
+                    sendMessage(update, "Расписание понедельника изменено на:\n"+getTextFromFile("monday.txt"));
+                }
+                else if (commandList.get(1).equalsIgnoreCase("вторник")){
+                    while(commandIter.hasNext())
+                        textBuilder.append(commandIter.next()+" ");
+                    saveText(getPathsWithCalendarFiles+"tuesday.txt", textBuilder.toString());
+                    sendMessage(update, "Расписание вторника изменено на:\n"+getTextFromFile("tuesday.txt"));
+                }
+                else if (commandList.get(1).equalsIgnoreCase("среда")){
+                    while(commandIter.hasNext())
+                        textBuilder.append(commandIter.next()+" ");
+                    saveText(getPathsWithCalendarFiles+"wednesday.txt", textBuilder.toString());
+                    sendMessage(update, "Расписание среды изменено на:\n"+getTextFromFile("wednesday.txt"));
+                }
+                else if (commandList.get(1).equalsIgnoreCase("четверг")){
+                    while(commandIter.hasNext())
+                        textBuilder.append(commandIter.next()+" ");
+                    saveText(getPathsWithCalendarFiles+"thursday.txt", textBuilder.toString());
+                    sendMessage(update, "Расписание четверга изменено на:\n"+getTextFromFile("thursday.txt"));
+                }
+                else if (commandList.get(1).equalsIgnoreCase("пятница")){
+                    while(commandIter.hasNext())
+                        textBuilder.append(commandIter.next()+" ");
+                    saveText(getPathsWithCalendarFiles+"friday.txt", textBuilder.toString());
+                    sendMessage(update, "Расписание пятницы изменено на:\n"+getTextFromFile("friday.txt"));
+                }
+            }
             else if (command.equals("/start")) {
                 if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.TUESDAY){
                     text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
                             + "\nПример: \n"
-                            + "\n" + TUESDAY;
-                } else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.WEDNESDAY){
+                            + "\n" + getTextFromFile("tuesday.txt");
+                }
+                else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.WEDNESDAY){
                     text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
                             + "\nПример: \n"
-                            + "\n" + WEDNESDAY;
-                } else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.THURSDAY){
+                            + "\n" + getTextFromFile("wednesday.txt");
+                }
+                else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.THURSDAY){
                     text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
                             + "\nПример: \n"
-                            + "\n" + THURSDAY;
-                } else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.FRIDAY){
+                            + "\n" + getTextFromFile("thursday.txt");
+                }
+                else if (LocalDate.now().getDayOfWeek() == java.time.DayOfWeek.FRIDAY){
                     text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
                             + "\nПример: \n"
-                            + "\n" + FRIDAY;
-                } else text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
+                            + "\n" + getTextFromFile("friday.txt");
+                }
+                else text = "_Приветствую тебя в боте для удобной выгрузки расписания занятий и еще каких-либо плюшек, введи день недели чтобы начать_\n"
                         + "\nПример: \n"
-                        + "\n" + MONDAY;
+                        + "\n" + getTextFromFile("monday.txt");
                 sendMessage(update, text);
             }
-            else if (command.equalsIgnoreCase("Список")){
-                sendMessage(update, service.getList().toString());
-            }
-            else sendMessage(update, text);
+            else sendMessage(update, "Такой команды нет, я только для расписания предназначен...\n"
+                        + "\n*Даже у меня есть смысл существования, а у тебя?*");
         }
     }
-    public String createDay(String... args){
-        return String.format(
-                "*%s* \n\n" +
-                        "*8:30 - 9:45 - %s*" +
-                        "\nПрепод - _%s_\n" +
-                        "\n*10:00 - 11:20 - %s*" +
-                        "\nПрепод - _%s_\n" +
-                        "\n*11:30 - 12:50 - %s*" +
-                        "\nПрепод - _%s_\n" +
-                        "\n*13:10 - 14:30 - %s*" +
-                        "\nПрепод - _%s_",
-                args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]
-        );
+    public String getTextFromFile(String file){
+        BufferedInputStream stream = null;
+        byte[] sourcesListByteArray = null;
+        try {
+            stream = new BufferedInputStream(new FileInputStream(getPathsWithCalendarFiles+file));
+            sourcesListByteArray = stream.readAllBytes();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stream.close(); } catch (Exception e){ e.printStackTrace(); }
+        }
+        return new String(sourcesListByteArray);
     }
-    public String createFriday(String... args){
-        return String.format("*%s* \n\n" +
-                "*8:30 - 9:30 - %s*" +
-                "\nПрепод - _%s_\n" +
-                "\n*9:40 - 10:40 - %s*" +
-                "\nПрепод - _%s_\n" +
-                "\n*10:50 - 11:50 - %s*" +
-                "\nПрепод - _%s_\n" +
-                "\n*12:10 - 13:10 - %s*" +
-                "\nПрепод - _%s_",
-        args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]
-        );
+    public boolean saveText(String file, String text){
+        OutputStreamWriter stream = null;
+        try {
+            stream = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+            stream.write(text.toCharArray());
+            stream.flush();
+            log.info("В файл {} записан текст: {}", file, text);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                stream.close();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -180,14 +195,6 @@ public class U_32_bot extends TelegramLongPollingBot {
         keyboardRow.add(row2);
         keyboardRow.add(row3);
         keyboardMarkup.setKeyboard(keyboardRow);
-
-        if (!service.inTable(update.getMessage().getChatId())) {
-            StudentEntity entity = new StudentEntity();
-            entity.setUser_id(update.getMessage().getChatId());
-            entity.setUsername(update.getMessage().getFrom().getUserName());
-            service.add(entity);
-            log.info("Добавлен пользователь с id {} и username {}", entity.getUser_id(), entity.getUsername());
-        }
 
         try {
             execute(

@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BotsApplication {
 	public static boolean isTest;
+	public static String getPathsWithCalendarFiles = "C:\\Users\\yasha\\IdeaProjects\\TelegramBots\\Bots\\";
 
 	public static void main(String[] args) throws InterruptedException {
 		Scanner console = new Scanner(System.in);
@@ -18,6 +19,14 @@ public class BotsApplication {
 			} else if (answer.equalsIgnoreCase("N")) {
 				isTest = false;
 			}
+		System.out.println("Введите директорию с файлами расписания, пример:\n C:\\Users\\yasha\\IdeaProjects\\TelegramBots\\Bots\\ <- в папке directory ");
+		getPathsWithCalendarFiles = console.nextLine();
+			while(getPathsWithCalendarFiles.contains("/") && getPathsWithCalendarFiles.charAt(getPathsWithCalendarFiles.length() - 1) != '/' ||
+			      getPathsWithCalendarFiles.contains("\\") && getPathsWithCalendarFiles.charAt(getPathsWithCalendarFiles.length() - 1) != '\\') {
+				System.out.println("Директория "+getPathsWithCalendarFiles+" не корректна");
+				getPathsWithCalendarFiles = console.nextLine();
+			}
+		System.out.println("Директория введена -> "+getPathsWithCalendarFiles);
 		SpringApplication.run(AppConfig.class);
 	}
 
