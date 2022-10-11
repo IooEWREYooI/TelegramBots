@@ -21,6 +21,7 @@ import static Telegram.Bots.BotsApplication.isTest;
 @ComponentScan("Telegram.Bots")
 public class AppConfig {
     private Logger log = LoggerFactory.getLogger(AppConfig.class);
+
     @Autowired
     u_bablo_bot u_bablo_bot = new u_bablo_bot();
     @Autowired

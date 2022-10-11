@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>Telegram</groupId>
 	<artifactId>Bots</artifactId>
-	<version>1.5.0</version>
+	<version>1.6.1</version>
 	<name>Bots</name>
 	<description>Исправлены баги и немного добавлен фронтенд для красоты</description>
 	<properties>

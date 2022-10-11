@@ -34,7 +34,4 @@ build/
 ### VS Code ###
 .vscode/
 
-BotsConfig.class
-BotsConfig.java
-*.txt
-garik_bot.java
+
