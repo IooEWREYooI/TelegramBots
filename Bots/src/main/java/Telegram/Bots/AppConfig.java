@@ -20,7 +20,7 @@ import static Telegram.Bots.BotsApplication.isTest;
 @Configuration
 @ComponentScan("Telegram.Bots")
 public class AppConfig {
-    private Logger log = LoggerFactory.getLogger(AppConfig.class);
+    private final Logger log = LoggerFactory.getLogger(AppConfig.class);
 
     @Autowired
     u_bablo_bot u_bablo_bot = new u_bablo_bot();
@@ -33,18 +33,15 @@ public class AppConfig {
     public void u_bablo_bot_reg(){
         registartion(u_bablo_bot);
     }
-
     @Bean
     public void U_32_bot_reg(){
         registartion(U_32_bot);
     }
-
     @Bean
     public void garik_bot_reg(){
         if (!isTest)
         registartion(garik_bot);
     }
-
     private void registartion(TelegramLongPollingBot bot){
         try {
             TelegramBotsApi TelegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);

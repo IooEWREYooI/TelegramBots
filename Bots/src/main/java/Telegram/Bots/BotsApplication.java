@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BotsApplication {
 	public static boolean isTest;
-	public static String getPathsWithCalendarFiles = "C:\\Users\\yasha\\IdeaProjects\\TelegramBots\\Bots\\";
+	public static String getPathsWithCalendarFiles = "C:\\Users\\Яков Мануилов\\IdeaProjects\\TelegramBots\\Bots\\";
 
 	public static void main(String[] args) throws InterruptedException {
 		Scanner console = new Scanner(System.in);
